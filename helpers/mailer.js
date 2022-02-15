@@ -1,11 +1,24 @@
-const nodemailer = require("nodemailer");
+const transporter = require("../config/mailer");
+const { activation, wellcome } = require("./templates");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-});
+const sendActivationMail = async ({ to, token }) => {
+  try {
+    const template = activation({ to, token });
+    return await transporter.sendMail(template);
+  } catch (e) {
+    console.info('> Error at "sendActivationMail" helper: ', e.message);
+    return false;
+  }
+};
 
-module.exports = transporter;
+const sendWellcomeMail = async ({ to, token }) => {
+  try {
+    const template = wellcome({ to, token });
+    return await transporter.sendMail(template);
+  } catch (e) {
+    console.info('> Error at "sendWellcomMail" helper: ', e.message);
+    return false;
+  }
+};
+
+module.exports = { sendActivationMail, sendWellcomeMail };
