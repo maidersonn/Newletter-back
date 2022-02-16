@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "db:create": "node scripts/creation.js"
+    "db:create": "node scripts/creation.js",
+    "db:drop": "node scripts/drop.js"
   },
   "author": "Maider",
   "license": "ISC",
