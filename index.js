@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-require("./cron_mail");
+require("./config/cron-mailer");
 const db = require("./config/db");
 
 app.use(express.json());
