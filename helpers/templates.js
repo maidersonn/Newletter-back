@@ -5,7 +5,7 @@ const activation = ({ to, token }) => ({
   html: `
         <h2>Un último paso</h2>
         <p>Para confirmar tu cuenta, haz clic en el siguiente enlace: 
-        <a href="${process.env.VERCEL_URL}:${process.env.PORT}/auth/confirmation/${token}" target="_blank"> ${process.env.VERCEL_URL}/auth/confirmation/${token} </a>
+        <a href="${process.env.SERVER_URL}:${process.env.PORT}/confirmation/${token}" target="_blank"> ${process.env.SERVER_URL}:${process.env.PORT}/confirmation/${token} </a>
         </p>
         <p>Muchas gracias.</p>
       `,
@@ -14,7 +14,9 @@ const activation = ({ to, token }) => ({
 const wellcome = ({ to, username }) => ({
   from: `" 🤟 Tutteam" ${process.env.MAIL_USER}`,
   to,
-  subject: `${username || ""}, tu cuenta ha sido verificada`,
+  subject: `${
+    username || "Querido/a subscriptor/a"
+  }, tu cuenta ha sido verificada`,
   html: `
       <h2> Gracias por suscribirte ${username || ""}. </h2>
       <p> Tu cuenta ha sido verificada. </p>

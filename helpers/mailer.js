@@ -13,9 +13,9 @@ const sendActivationMail = async ({ to, token }) => {
   }
 };
 
-const sendWellcomeMail = async ({ to, token }) => {
+const sendWellcomeMail = async ({ to, username }) => {
   try {
-    const template = wellcome({ to, token });
+    const template = wellcome({ to, username });
     return await send(template);
   } catch (e) {
     console.info('> Error at "sendWellcomMail" helper: ', e.message);

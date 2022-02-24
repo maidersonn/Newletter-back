@@ -12,7 +12,7 @@ const userExists = async (db, email) => {
   }
 };
 
-const createUser = async (db, { email, username, token }) => {
+const createUser = async (db, { email, username = "", token }) => {
   try {
     return await db.query(sql`
         INSERT INTO users ( email, username, token )
@@ -23,5 +23,26 @@ const createUser = async (db, { email, username, token }) => {
     return false;
   }
 };
+const confirmUser = async (db, token) => {
+  try {
+    return await db.transaction(async (tx) => {
+      const user = await tx.maybeOne(sql`
+        SELECT * FROM users
+        WHERE token = ${token}
+      `);
+      if (!user) throw new Error("invalid token");
+      await tx.query(sql`
+        UPDATE users
+        SET
+          token = null
+        WHERE
+          token = ${token}
+      `);
+      return user;
+    });
+  } catch (error) {
+    console.info('Error at "confirmUser" query: ', error.message);
+  }
+};
 
-module.exports = { userExists, createUser };
+module.exports = { userExists, createUser, confirmUser };
