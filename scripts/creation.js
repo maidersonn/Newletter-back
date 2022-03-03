@@ -7,7 +7,6 @@ const create = async () => {
   try {
     await db.query(sql`
     CREATE TABLE IF NOT EXISTS users (
-      username TEXT,
       email TEXT UNIQUE NOT NULL,
       token TEXT
     )`);

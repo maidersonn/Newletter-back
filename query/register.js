@@ -12,11 +12,11 @@ const userExists = async (db, email) => {
   }
 };
 
-const createUser = async (db, { email, username = "", token }) => {
+const createUser = async (db, { email, token }) => {
   try {
     return await db.query(sql`
-        INSERT INTO users ( email, username, token )
-        VALUES ( ${email}, ${username}, ${token} )
+        INSERT INTO users ( email, token )
+        VALUES ( ${email}, ${token} )
       `);
   } catch (error) {
     console.info('> Error at "createUser" query:', error.message);

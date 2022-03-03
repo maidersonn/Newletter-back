@@ -11,14 +11,12 @@ const activation = ({ to, token }) => ({
       `,
 });
 
-const wellcome = ({ to, username }) => ({
+const wellcome = ({ to }) => ({
   from: `" 🤟 Tutteam" ${process.env.MAIL_USER}`,
   to,
-  subject: `${
-    username || "Querido/a subscriptor/a"
-  }, tu cuenta ha sido verificada`,
+  subject: `Querido/a subscriptor/a, tu cuenta ha sido verificada`,
   html: `
-      <h2> Gracias por suscribirte ${username || ""}. </h2>
+      <h2> Gracias por suscribirte. </h2>
       <p> Tu cuenta ha sido verificada. </p>
       <p> Bienvenido/a/e ! </p>  
     `,

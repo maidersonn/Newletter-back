@@ -20,7 +20,7 @@ module.exports = (db) => async (req, res, next) => {
     });
   }
 
-  await sendWellcomeMail({ to: result.email, username: result.username });
+  await sendWellcomeMail({ to: result.email });
 
   res.status(200).json({
     success: true,

@@ -3,7 +3,7 @@ const { sendActivationMail } = require("../helpers/mailer");
 const { userExists, createUser } = require("../query/register");
 
 const subscribe = (db) => async (req, res, next) => {
-  const { email, username } = req.body;
+  const { email } = req.body;
 
   if (!email) {
     return next({
@@ -25,7 +25,6 @@ const subscribe = (db) => async (req, res, next) => {
 
   const result = await createUser(db, {
     email,
-    username,
     token,
   });
 
